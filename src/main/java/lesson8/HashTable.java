@@ -3,7 +3,7 @@ package lesson8;
 class HashTable {
     private Item[] hashArr;
     private int arrSize;
-    private Item nonItem;
+    private Item nonItem;//элемента не существует
 
     public HashTable(int size){
         this.arrSize = size;
@@ -28,7 +28,7 @@ class HashTable {
         while (hashArr[hashVal] !=null && hashArr[hashVal].getKey()!=-1){
 //            ++hashVal;
             hashVal+=stepSize;
-            hashVal %= arrSize;
+            hashVal %= arrSize;//перебор к началу таблицы
         }
         hashArr[hashVal] = item;
     }
@@ -37,9 +37,9 @@ class HashTable {
         int stepSize = hashFuncDouble(key);
         while (hashArr[hashVal] !=null){
             if (hashArr[hashVal].getKey() == key){
-                Item temp = hashArr[hashVal];
-                hashArr[hashVal] = nonItem;
-                return temp;
+                Item temp = hashArr[hashVal];//существующее значение
+                hashArr[hashVal] = nonItem;//заменяем существующее значение на nonItem
+                return temp;//возвращаем то, что удалили
             }
 //            ++hashVal;
             hashVal+=stepSize;
@@ -56,7 +56,7 @@ class HashTable {
             }
 //            ++hashVal;
             hashVal+=stepSize;
-            hashVal %= arrSize;
+            hashVal %= arrSize;//перебор к началу таблицы
         }
         return null;
     }
